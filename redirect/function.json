@@ -1,0 +1,28 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "route": "{shortID:alpha}",
+      "methods": [
+        "get"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "tableName": "shortUrls",
+      "connection": "AzureWebJobsStorage",
+      "name": "tableBinding",
+      "type": "table",
+      "direction": "in",
+      "filter": "RowKey eq '{shortID}'",
+      "take": "1"
+    }
+  ]
+}
