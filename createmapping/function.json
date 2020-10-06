@@ -6,14 +6,21 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "get",
-        "post"
-      ]
+        "get"      ]
     },
     {
       "type": "http",
       "direction": "out",
       "name": "res"
+    },
+    {
+      "tableName": "shortUrls",
+      "connection": "AzureWebJobsStorage",
+      "name": "tableBinding1",
+      "type": "table",
+      "direction": "in",
+      "filter": "original eq '{url}'",
+      "take": "1"
     },
     {
       "tableName": "shortUrls",

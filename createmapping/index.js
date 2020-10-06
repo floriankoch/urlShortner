@@ -1,7 +1,4 @@
 //ToDo Error Handling
-
-
-
 const normalizeUrl = require('normalize-url');
 
 
@@ -11,6 +8,8 @@ module.exports = async function (context, req) {
     originalUrl = req.query.url;
     normalizedUrl = "";
     status = 200;
+    existingUrl = context.bindings.tableBinding1[0].RowKey
+    context.log(existingUrl)
 
     if (originalUrl) {
     normalizedUrl =   normalizeUrl(originalUrl, {forceHttps: true});
@@ -30,7 +29,7 @@ module.exports = async function (context, req) {
 
     context.res = {
         status: status,
-        body: "Your shortn ID is " + shortID + normalizedUrl
+        body: "Your shortn ID is " + shortID + normalizedUrl + "x" + existingUrl
     };
 
     context.bindings.tableBinding = [];
@@ -39,6 +38,7 @@ module.exports = async function (context, req) {
             PartitionKey: 'link',
             RowKey: shortID,
             Url: normalizedUrl,
+            originalUrl: originalUrl,
 
         });
    
